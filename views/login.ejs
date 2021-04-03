@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- script -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="254709854890-v2s316h9v631gr0h570js01096gio73g.apps.googleusercontent.com">
+    <link href="login.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0&appId=473575313765889&autoLogAppEvents=1" nonce="CkGkp54P"></script>
+    
+    <div id="header">
+        <h1> Login Page</h1>
+    </div>
+    <div>
+
+        <div id="LoginForm">
+            <h2>
+                Sign in to your account    
+            </h2>
+            <p>
+                Build skills for today, tomorrow, and beyond.
+                Education to future-proof your career
+            </p>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <div class="fb-login-button" data-width="100" data-size="medium" data-button-type="login_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="false"></div>
+            <form>
+                <input type="email" name="mail" placeholder="Enter Email">
+                <input type="password" name="password" placeholder="Enter password">
+                <button type="submit" name="submit">Sign In</button>
+            </form>
+
+            <a> Forgot Password </a>>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <!-- <a href="#" onclick="signOut();">Sign out</a> -->
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+            var id_token = googleUser.getAuthResponse().id_token;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/login');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+                console.log('Signed in as: ' + xhr.responseText);
+                if(xhr.responseText == 'success'){
+                    signOut();
+                    location.assign('/profile')
+                }
+            };
+            xhr.send(JSON.stringify({token: id_token}));
+
+        }
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+            console.log('User signed out.');
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
