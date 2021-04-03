@@ -4,7 +4,7 @@
 **2. Google Authentication** <br/>
 ![Google Authentication](Screenshots/GoogleAuthenticator.JPG)<br/>
 **3. Google Authentication Profile** <br/>
-![Google Authentication Profile](Screenshots/Screenshots/Profile.JPG)<br/>
+![Google Authentication Profile](/Screenshots/Profile.JPG)<br/>
 **4. Facebook Authentication** <br/>
 ![Facebook Authentication](/Screenshots/FacebookAuthenticator.JPG)<br/>
 **5. Facebook Authentication Complete** <br/>
